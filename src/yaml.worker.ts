@@ -1,5 +1,5 @@
 import { initialize } from 'monaco-worker-manager/worker'
-import { type ClientCapabilities } from 'vscode-json-languageservice'
+import { ClientCapabilities } from 'vscode-json-languageservice/lib/esm/jsonLanguageTypes.js'
 import { TextDocument } from 'vscode-languageserver-textdocument'
 import {
   type CodeAction,
