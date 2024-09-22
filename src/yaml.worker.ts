@@ -1,4 +1,5 @@
 import { initialize } from 'monaco-worker-manager/worker'
+import { type ClientCapabilities } from 'vscode-json-languageservice'
 import { TextDocument } from 'vscode-languageserver-textdocument'
 import {
   type CodeAction,
@@ -11,7 +12,6 @@ import {
   type FormattingOptions,
   type Hover,
   type LocationLink,
-  MarkupKind,
   type Position,
   type Range,
   type SelectionRange,
@@ -136,19 +136,10 @@ initialize<YAMLWorker, MonacoYamlOptions>((ctx, { enableSchemaRequest, ...langua
     schemaRequestService: enableSchemaRequest ? schemaRequestService : null,
     telemetry,
     workspaceContext,
-    // Copied from https://github.com/microsoft/vscode-json-languageservice/blob/493010da9dc2cd1cc139d403d4709d97064b17e9/src/jsonLanguageTypes.ts#L325-L335
+    // https://github.com/microsoft/vscode-json-languageservice/blob/493010da9dc2cd1cc139d403d4709d97064b17e9/src/jsonLanguageTypes.ts#L325-L335
     // Usage: https://github.com/microsoft/monaco-editor/blob/f6dc0eb8fce67e57f6036f4769d92c1666cdf546/src/language/json/jsonWorker.ts#L38
-    clientCapabilities: {
-      textDocument: {
-        completion: {
-          completionItem: {
-            documentationFormat: [MarkupKind.Markdown, MarkupKind.PlainText],
-            commitCharactersSupport: true
-          }
-        },
-        moniker: {}
-      }
-    }
+    // @ts-expect-error `moniker` is missing from `ClientCapabilities.LATEST`
+    clientCapabilities: ClientCapabilities.LATEST
   })
 
   const withDocument =
