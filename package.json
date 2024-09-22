@@ -1,6 +1,6 @@
 {
   "name": "@kong/monaco-yaml",
-  "version": "5.2.2-patch.2",
+  "version": "5.2.2-patch.3",
   "description": "YAML plugin for the Monaco Editor",
   "homepage": "https://monaco-yaml.js.org",
   "scripts": {
